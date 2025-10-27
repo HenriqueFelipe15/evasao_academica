@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - Observatório Educacional</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Adicional para Tabelas */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            Observatório Educacional
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard_evasao.html">Dashboard</a></li>
+                <li><a href="alunos.html">Alunos</a></li> 
+                <li><a href="solucoes.html">Soluções</a></li>
+                <li><a href="relatorios.html" class="active">Relatórios</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <h1>Relatórios Avançados e Insights de Dados</h1>
+        
+        <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="metric-card blue">
+                <h3>Total de Relatórios Gerados (Mês)</h3>
+                <p class="metric-number">48</p>
+            </div>
+            <div class="metric-card yellow">
+                <h3>Clientes Premium</h3>
+                <p class="metric-number">12</p>
+            </div>
+            <div class="metric-card green">
+                <h3>Satisfação com Insights</h3>
+                <p class="metric-number">95%</p>
+            </div>
+        </div>
+
+        <div class="analysis-grid" style="grid-template-columns: 1fr;">
+            <div class="section-card">
+                <h2>Relatórios Preditivos para Decisão Estratégica</h2>
+                 
+                
+                <div class="solution-grid" id="predictive-reports">
+                    
+                    <div class="solution-card report-card" data-report="previsao_mensal">
+                        <i class="fas fa-magic"></i>
+                        <h3>Previsão de Evasão (Próximos 3 Meses)</h3>
+                        <p>Identifica os cursos e períodos com maior probabilidade de evasão em curto prazo. Ideal para intervenções imediatas.</p>
+                        <button class="btn btn-contact btn-small report-action" data-action="download"><i class="fas fa-file-download"></i> Baixar PDF</button>
+                    </div>
+
+                    <div class="solution-card report-card" data-report="perfil_aluno">
+                        <i class="fas fa-user-chart"></i>
+                        <h3>Análise Aprofundada do Perfil do Aluno</h3>
+                        <p>Insights detalhados sobre desempenho, engajamento e fatores demográficos que influenciam o abandono[cite: 41].</p>
+                        <button class="btn btn-contact btn-small report-action" data-action="visualizar"><i class="fas fa-eye"></i> Visualizar Dashboard Premium</button>
+                    </div>
+
+                    <div class="solution-card report-card" data-report="eficacia_solucao">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>ROI e Eficácia das Intervenções</h3>
+                        <p>Avaliação da rentabilidade e do impacto das mentorias, auxílios e parcerias na taxa de retenção.</p>
+                        <button class="btn btn-contact btn-small report-action" data-action="visualizar"><i class="fas fa-chart-line"></i> Ver Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>Histórico de Relatórios Gerados</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nome do Relatório</th>
+                        <th>Data de Geração</th>
+                        <th>Status</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Previsão Mensal (Nov/24)</td>
+                        <td>01/10/2024</td>
+                        <td style="color: var(--success-color); font-weight: 700;">Concluído</td>
+                         <td><button class="btn btn-view btn-small report-action-small" data-action="download"><i class="fas fa-download"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Eficácia das Soluções (T3)</td>
+                        <td>15/09/2024</td>
+                        <td style="color: var(--success-color); font-weight: 700;">Concluído</td>
+                         <td><button class="btn btn-view btn-small report-action-small" data-action="download"><i class="fas fa-download"></i></button></td>
+                    </tr>
+                    <tr>
+                        <td>Análise Perfil (Set)</td>
+                        <td>01/09/2024</td>
+                        <td style="color: var(--warning-color); font-weight: 700;">Pendente</td>
+                         <td><button class="btn btn-contact btn-small report-action-small" data-action="gerar"><i class="fas fa-play"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p> &copy; 2025 UNISENAI. Implementação de Solução Preventiva à Evasão.</p>
+    </footer>
+    <script src="script.js"></script> 
+</body>
+</html>

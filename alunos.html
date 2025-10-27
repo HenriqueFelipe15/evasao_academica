@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Alunos em Risco - Observatório Educacional</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            Observatório Educacional
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard_evasao.html">Dashboard</a></li>
+                <li><a href="alunos.html" class="active">Alunos</a></li> 
+                <li><a href="solucoes.html">Soluções</a></li>
+                <li><a href="relatorios.html">Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+    <h1>Gerenciamento de Alunos em Risco</h1>
+    
+    <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="metric-card blue">
+            <h3>Total de Alunos Monitorados</h3>
+            <p class="metric-number">2450</p>
+        </div>
+        <div class="metric-card red">
+            <h3>Alunos em Risco Ativo</h3>
+            <p class="metric-number">452</p>
+        </div>
+        <div class="metric-card green">
+            <h3>Intervenções Realizadas (Mês)</h3>
+            <p class="metric-number">128</p>
+        </div>
+    </div>
+
+    <div class="analysis-grid" style="grid-template-columns: 1fr;">
+        <div class="section-card">
+            <div class="controls">
+                <h2>Lista de Alunos Prioritários</h2>
+                <div class="search-filters">
+                    <select class="filter-select">
+                        <option>Filtrar por Curso</option>
+                        </select>
+                    <select class="filter-select">
+                        <option>Filtrar por Mentor</option>
+                        </select>
+                    <select class="filter-select">
+                        <option>Filtrar por Risco</option>
+                        <option>Risco Alto (70% +)</option>
+                        <option>Risco Médio (45% - 69%)</option>
+                    </select>
+                    <input type="text" placeholder="Buscar por nome..." class="search-input">
+                </div>
+            </div>
+
+            <div class="student-list" id="student-management-list">
+                </div>
+            
+            <div class="pagination-controls">
+    <button id="prev-page" class="pagination-btn secondary-btn">
+        <i class="fas fa-chevron-left action-icon"></i> Anterior
+    </button>
+    
+    <span id="pagination-info">Página 1 de 10</span>
+    
+    <button id="next-page" class="pagination-btn primary-btn">
+        Próximo <i class="fas fa-chevron-right action-icon"></i>
+    </button>
+</div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p> &copy; 2025 UNISENAI. Implementação de Solução Preventiva à Evasão.</p>
+</footer>
+
+    <script>
+    // --- 1. DADOS BASE E VARIÁVEIS DE CONTROLE ---
+    const students = [
+        // ... (Seus 10 objetos de aluno permanecem aqui) ...
+        {
+            name: "Leanne Graham",
+            course: "Engenharia Civil | 5º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "alto",
+            riskPercentage: 90,
+            riskTrend: "up", 
+            avgGrade: 4.5,
+            mainReason: "Situação Financeira",
+            mentor: "Dr. Ricardo G.",
+            lastInterventionDate: "15/Out",
+            interventionStatus: "pendente",
+            email: "leanne.g@edu.br"
+        },
+        {
+            name: "Ervin Howell",
+            course: "Administração | 3º Semestre",
+            courseName: "Administração",
+            riskLevel: "medio",
+            riskPercentage: 65,
+            riskTrend: "stable",
+            avgGrade: 3.2,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Prof. Helena S.",
+            lastInterventionDate: "20/Out",
+            interventionStatus: "andamento",
+            email: "ervin.h@edu.br"
+        },
+        {
+            name: "Clementine Bauch",
+            course: "Engenharia Civil | 1º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "medio",
+            riskPercentage: 55,
+            riskTrend: "down",
+            avgGrade: 3.8,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Dr. Ricardo G.",
+            lastInterventionDate: "10/Out",
+            interventionStatus: "resolvido",
+            email: "clement.b@edu.br"
+        },
+        {
+            name: "Patricia Lebsack",
+            course: "Administração | 7º Semestre",
+            courseName: "Administração",
+            riskLevel: "alto",
+            riskPercentage: 75,
+            riskTrend: "up",
+            avgGrade: 2.9,
+            mainReason: "Situação Financeira",
+            mentor: "Prof. Helena S.",
+            lastInterventionDate: "25/Out",
+            interventionStatus: "pendente",
+            email: "patricia.l@edu.br"
+        },
+        {
+            name: "Chelsey Dietrich",
+            course: "Engenharia Civil | 3º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "medio",
+            riskPercentage: 70,
+            riskTrend: "stable",
+            avgGrade: 3.5,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Dr. Ricardo G.",
+            lastInterventionDate: "05/Out",
+            interventionStatus: "andamento",
+            email: "chelsey.d@edu.br"
+        },
+        {
+            name: "Mrs. Dennis Schulist",
+            course: "Administração | 4º Semestre",
+            courseName: "Administração",
+            riskLevel: "medio",
+            riskPercentage: 60,
+            riskTrend: "down",
+            avgGrade: 3.9,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Prof. Helena S.",
+            lastInterventionDate: "12/Out",
+            interventionStatus: "resolvido",
+            email: "dennis.s@edu.br"
+        },
+        {
+            name: "Kurtis Weissnat",
+            course: "Engenharia Civil | 8º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "alto",
+            riskPercentage: 85,
+            riskTrend: "up",
+            avgGrade: 2.5,
+            mainReason: "Situação Financeira",
+            mentor: "Dr. Ricardo G.",
+            lastInterventionDate: "18/Out",
+            interventionStatus: "pendente",
+            email: "kurtis.w@edu.br"
+        },
+        {
+            name: "Nicholas Runolfsdottir V",
+            course: "Engenharia Civil | 2º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "medio",
+            riskPercentage: 50,
+            riskTrend: "stable",
+            avgGrade: 4.1,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Prof. Helena S.",
+            lastInterventionDate: "01/Out",
+            interventionStatus: "andamento",
+            email: "nicholas.r@edu.br"
+        },
+        {
+            name: "Glenna Reichert",
+            course: "Engenharia Civil | 6º Semestre",
+            courseName: "Engenharia Civil",
+            riskLevel: "medio",
+            riskPercentage: 45,
+            riskTrend: "down",
+            avgGrade: 4.2,
+            mainReason: "Adaptação Acadêmica",
+            mentor: "Dr. Ricardo G.",
+            lastInterventionDate: "07/Out",
+            interventionStatus: "resolvido",
+            email: "glenna.r@edu.br"
+        },
+        {
+            name: "Clementine DuBuque",
+            course: "Administração | 5º Semestre",
+            courseName: "Administração",
+            riskLevel: "alto",
+            riskPercentage: 80,
+            riskTrend: "up",
+            avgGrade: 2.8,
+            mainReason: "Situação Financeira",
+            mentor: "Prof. Helena S.",
+            lastInterventionDate: "22/Out",
+            interventionStatus: "pendente",
+            email: "clement.d@edu.br"
+        }
+    ];
+
+    // Variáveis de Paginação
+    const STUDENTS_PER_PAGE = 5; // Número de alunos a mostrar por página (Reduzido para 5 para simular paginação com seus 10 alunos)
+    let currentPage = 1;
+    let currentFilteredList = students; // A lista que será paginada
+
+    // --- FUNÇÕES AUXILIARES ---
+
+    function updatePaginationInfo() {
+        const totalItems = currentFilteredList.length;
+        const totalPages = Math.ceil(totalItems / STUDENTS_PER_PAGE);
+
+        const paginationInfo = document.getElementById('pagination-info');
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+
+        if (!paginationInfo) return; // Garante que o elemento existe
+
+        if (totalItems === 0) {
+            paginationInfo.textContent = '0 Alunos';
+        } else {
+            const start = (currentPage - 1) * STUDENTS_PER_PAGE + 1;
+            const end = Math.min(currentPage * STUDENTS_PER_PAGE, totalItems);
+            
+            paginationInfo.textContent = `Página ${currentPage} de ${totalPages} (${start}-${end} de ${totalItems})`;
+        }
+
+        // Habilita/Desabilita botões
+        if (prevButton) prevButton.disabled = currentPage === 1;
+        if (nextButton) nextButton.disabled = currentPage === totalPages || totalPages === 0;
+
+        // Atualiza a exibição dos botões de setas
+        const prevArrow = document.getElementById('prev-arrow');
+        const nextArrow = document.getElementById('next-arrow');
+
+        if (prevArrow) prevArrow.style.color = currentPage === 1 ? '#ccc' : 'var(--primary-color)';
+        if (nextArrow) nextArrow.style.color = currentPage === totalPages || totalPages === 0 ? '#ccc' : 'var(--primary-color)';
+    }
+
+    // --- FUNÇÃO DE RENDERIZAÇÃO (MODIFICADA) ---
+    function renderStudentList(studentArray) {
+        const listContainer = document.getElementById('student-management-list');
+        listContainer.innerHTML = ''; 
+
+        // 1. Aplica a Paginação
+        const startIndex = (currentPage - 1) * STUDENTS_PER_PAGE;
+        const endIndex = startIndex + STUDENTS_PER_PAGE;
+        const studentsToRender = studentArray.slice(startIndex, endIndex);
+
+        if (studentsToRender.length === 0 && studentArray.length > 0) {
+             // Ajuste se o filtro levou a uma página vazia (Ex: Estava na página 3, mas o filtro só tem 1 página)
+            currentPage = 1;
+            renderStudentList(studentArray);
+            return;
+        }
+
+        if (studentsToRender.length === 0) {
+            listContainer.innerHTML = '<p style="text-align: center; padding: 30px; font-style: italic;">Nenhum aluno encontrado com os filtros aplicados.</p>';
+            updatePaginationInfo();
+            return;
+        }
+        
+        // 2. Renderiza a lista (o HTML permanece o mesmo)
+        studentsToRender.forEach(student => {
+            const trendIcon = student.riskTrend === 'up' ? 'fa-arrow-up' :
+                             student.riskTrend === 'down' ? 'fa-arrow-down' : 'fa-minus';
+            const trendClass = student.riskTrend === 'up' ? 'trend-up' :
+                               student.riskTrend === 'down' ? 'trend-down' : 'trend-stable';
+
+            const itemClass = student.riskLevel === 'alto' ? 'high' : 'medium';
+
+            const html = `
+                <div class="student-item ${itemClass}">
+                    <div class="student-info">
+                        <span class="student-name">${student.name}</span>
+                        <span style="font-size: 0.9em; opacity: 0.8;">${student.course}</span>
+                        <span class="risk-badge ${student.riskLevel}">
+                            Risco ${student.riskLevel.charAt(0).toUpperCase() + student.riskLevel.slice(1)} <span class="risk-percentage">(${student.riskPercentage}%)</span>
+                        </span>
+                    </div>
+                    
+                    <div class="academic-risk-details">
+                        <div class="detail-block">
+                            <span class="detail-label">Média Geral / Tendência</span>
+                            <span class="detail-value">
+                                ${student.avgGrade.toFixed(1)} 
+                                <span class="risk-trend ${trendClass}" title="Tendência: ${student.riskTrend === 'up' ? 'Aumentando' : student.riskTrend === 'down' ? 'Diminuindo' : 'Estável'}">
+                                    <i class="fas ${trendIcon} action-icon" style="margin-left: 5px;"></i>
+                                </span>
+                            </span>
+                        </div>
+                         <div class="detail-block">
+                            <span class="detail-label">Motivo Principal</span>
+                            <span class="detail-value">${student.mainReason}</span>
+                        </div>
+                        <div class="detail-block">
+                            <span class="detail-label">Mentor Responsável</span>
+                            <span class="detail-value">${student.mentor}</span>
+                        </div>
+                    </div>
+
+                    <div class="intervention-status">
+                        <span class="detail-label">Última Intervenção</span>
+                        <span class="status-badge ${student.interventionStatus}">Status: ${student.interventionStatus.charAt(0).toUpperCase() + student.interventionStatus.slice(1)}</span>
+                        <span class="last-action-date">Data: ${student.lastInterventionDate}</span>
+                    </div>
+                    
+                    <div class="student-actions">
+                        <a href="mailto:${student.email}" title="Enviar E-mail Rápido" class="action-button">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <button class="action-button primary" title="Registrar Intervenção">
+                            <i class="fas fa-plus action-icon"></i> Intervir
+                        </button>
+                        <button class="action-button" title="Ver Histórico Completo">
+                            <i class="fas fa-chevron-right action-icon"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            listContainer.innerHTML += html;
+        });
+
+        // 3. Atualiza a informação de paginação no final
+        updatePaginationInfo();
+    }
+
+    // --- FUNÇÃO DE FILTRAGEM (MODIFICADA PARA PAGINAÇÃO) ---
+
+    function applyFilters(resetPage = true) {
+        if (resetPage) {
+            currentPage = 1; // Volta para a primeira página ao aplicar novos filtros
+        }
+
+        const courseFilter = document.querySelector('select:nth-child(1)').value;
+        const mentorFilter = document.querySelector('select:nth-child(2)').value;
+        const riskFilter = document.querySelector('select:nth-child(3)').value;
+        const searchInput = document.querySelector('.search-input').value.toLowerCase();
+        
+        let filteredStudents = students.filter(student => {
+            let matches = true;
+
+            // ... (Lógica de Filtro mantida) ...
+            if (courseFilter !== 'Filtrar por Curso' && courseFilter !== 'Todos' && student.courseName !== courseFilter) {
+                matches = false;
+            }
+
+            if (mentorFilter !== 'Filtrar por Mentor' && student.mentor !== mentorFilter) {
+                matches = false;
+            }
+            
+            if (riskFilter !== 'Filtrar por Risco') {
+                if (riskFilter === 'Risco Alto (70% +)') {
+                    if (student.riskPercentage < 70) {
+                        matches = false;
+                    }
+                } else if (riskFilter === 'Risco Médio (45% - 69%)') {
+                    if (student.riskPercentage < 45 || student.riskPercentage > 69) {
+                        matches = false;
+                    }
+                }
+            }
+
+            if (searchInput && !student.name.toLowerCase().includes(searchInput)) {
+                matches = false;
+            }
+
+            return matches;
+        });
+
+        // Atualiza a lista de alunos filtrada para a paginação
+        currentFilteredList = filteredStudents; 
+        
+        renderStudentList(currentFilteredList);
+    }
+
+    // --- NOVAS FUNÇÕES DE NAVEGAÇÃO ---
+
+    function changePage(direction) {
+        const totalPages = Math.ceil(currentFilteredList.length / STUDENTS_PER_PAGE);
+
+        if (direction === 'prev' && currentPage > 1) {
+            currentPage--;
+        } else if (direction === 'next' && currentPage < totalPages) {
+            currentPage++;
+        } else {
+            return; // Impede ação se estiver no limite
+        }
+
+        // Renderiza a nova página da lista filtrada
+        renderStudentList(currentFilteredList); 
+        
+        // Rola para o topo da lista para melhor UX (Opcional)
+        document.getElementById('student-management-list').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- FUNÇÃO AUXILIAR PARA PREENCHER OS SELECTS (MANTIDA) ---
+    function populateFilters() {
+        // ... (Lógica de preenchimento mantida) ...
+        const uniqueCourses = [...new Set(students.map(s => s.courseName))].sort();
+        const uniqueMentors = [...new Set(students.map(s => s.mentor))].sort();
+
+        const courseSelect = document.querySelector('select:nth-child(1)');
+        const mentorSelect = document.querySelector('select:nth-child(2)');
+
+        uniqueCourses.forEach(course => {
+            const option = document.createElement('option');
+            option.value = course;
+            option.textContent = course;
+            courseSelect.appendChild(option);
+        });
+
+        uniqueMentors.forEach(mentor => {
+            const option = document.createElement('option');
+            option.value = mentor;
+            option.textContent = mentor;
+            mentorSelect.appendChild(option);
+        });
+    }
+
+    // --- INICIALIZAÇÃO E EVENT LISTENERS (MODIFICADA) ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+        populateFilters();
+        
+        // Inicializa a lista completa
+        applyFilters(false); // Não reseta a página, pois é a primeira carga
+
+        // Captura e configura os filtros (change/input chamam applyFilters)
+        const filterControls = document.querySelectorAll('.search-filters select, .search-filters input');
+
+        filterControls.forEach(control => {
+            if (control.tagName === 'SELECT') {
+                control.addEventListener('change', () => applyFilters(true));
+            } else if (control.tagName === 'INPUT') {
+                control.addEventListener('input', () => applyFilters(true));
+            }
+        });
+        
+        // Adiciona event listeners para os controles de paginação
+        const prevButton = document.getElementById('prev-page');
+        const nextButton = document.getElementById('next-page');
+
+        if (prevButton) prevButton.addEventListener('click', () => changePage('prev'));
+        if (nextButton) nextButton.addEventListener('click', () => changePage('next'));
+    });
+</script>
+</body>
+</html>

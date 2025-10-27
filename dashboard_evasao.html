@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Prevenção à Evasão</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            Observatório Educacional
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard_evasao.html" class="active">Dashboard</a></li> 
+                <li><a href="alunos.html">Alunos</a></li> 
+                <li><a href="solucoes.html">Soluções</a></li>
+                <li><a href="relatorios.html">Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <h1>Análise e Ação Preventiva de Evasão</h1>
+        
+        <div class="card-grid">
+            <div class="metric-card red">
+                <h3>Taxa de Evasão Atual</h3>
+                <p class="metric-number">18.5%</p>
+            </div>
+            <div class="metric-card blue">
+                <h3>Alunos em Risco</h3>
+                <p class="metric-number">452</p> 
+            </div>
+            <div class="metric-card green">
+                <h3>Meta de Retenção (1º Ano)</h3>
+                <p class="metric-number">90%</p>
+            </div>
+            <div class="metric-card yellow">
+                <h3>Investimento na Estrutura</h3>
+                <p class="metric-number">R$ 5-15 mil</p>
+            </div>
+        </div>
+
+        <div class="analysis-grid">
+            <div class="section-card">
+                <h2>Monitoramento e Tendências</h2>
+                <p>Taxa de Evasão por Semestre (Últimos 2 Anos)</p>
+                <div class="chart-box">
+                    <div class="fake-chart-bar">
+                        <div class="bar-wrapper">
+                            <span class="bar-value" style="--val: 22%">22%</span>
+                            <div class="bar-item" style="height: 70%;" data-height="70%"></div>
+                            <span class="bar-label">2023.1</span>
+                        </div>
+                        <div class="bar-wrapper">
+                            <span class="bar-value" style="--val: 18%">18%</span>
+                            <div class="bar-item" style="height: 55%;" data-height="55%"></div>
+                            <span class="bar-label">2023.2</span>
+                        </div>
+                        <div class="bar-wrapper">
+                            <span class="bar-value" style="--val: 20%">20%</span>
+                            <div class="bar-item" style="height: 65%;" data-height="65%"></div>
+                            <span class="bar-label">2024.1 (Atual)</span>
+                        </div>
+                        <div class="bar-wrapper">
+                            <span class="bar-value" style="--val: 15%">15%</span>
+                            <div class="bar-item" style="height: 40%;" data-height="40%"></div>
+                            <span class="bar-label">2024.2 (Projeção)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card risk-motives">
+                <h2>Principais Fatores de Risco</h2>
+                <ul>
+                    <li><i class="fas fa-money-bill-wave"></i> <span class="motive-label">Situação Financeira</span> <span class="motive-percentage">40%</span></li>
+                    <li><i class="fas fa-chalkboard-teacher"></i> <span class="motive-label">Didática Institucional</span> <span class="motive-percentage">30%</span></li>
+                    <li><i class="fas fa-route"></i> <span class="motive-label">Tempo de Deslocamento</span> <span class="motive-percentage">15%</span></li>
+                    <li><i class="fas fa-laptop-house"></i> <span class="motive-label">Migração para EAD</span> <span class="motive-percentage">15%</span></li>
+                </ul>
+                <p class="view-all"><a href="alunos.html">Identificar perfis de risco →</a></p>
+            </div>
+        </div>
+
+        <div class="section-card action-section">
+            <h2>Alunos em Risco - Ação Imediata <i class="fas fa-exclamation-circle text-danger"></i></h2>
+            <div class="student-list">
+                <div class="student-item high">
+                    <div class="student-info">
+                        <strong>Carregando Dados...</strong>
+                        <small>Aguarde a conexão com a API.</small>
+                    </div>
+                    <div class="student-action-btns">
+                        <button class="btn btn-view" disabled>...</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main> 
+
+   <footer>
+    <p> &copy; 2025 UNISENAI. Implementação de Solução Preventiva à Evasão.</p>
+</footer>
+
+    <script src="script.js"></script> 
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluções - Observatório Educacional</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Adicional para Tabelas */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .data-table th, .data-table td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .data-table th {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+    </style>
+    </head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            Observatório Educacional
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard_evasao.html">Dashboard</a></li>
+                <li><a href="alunos.html">Alunos</a></li> 
+                <li><a href="solucoes.html" class="active">Soluções</a></li> 
+                <li><a href="relatorios.html">Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <h1>Gestão de Soluções e Intervenções</h1>
+        
+        <div class="card-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="metric-card green">
+                <h3>Taxa de Retenção (Interv.)</h3>
+                <p class="metric-number">90%</p>
+            </div>
+            <div class="metric-card blue">
+                <h3>Alunos em Mentorias</h3>
+                <p class="metric-number">210</p>
+            </div>
+            <div class="metric-card yellow">
+                <h3>Programas Ativos</h3>
+                <p class="metric-number">6</p>
+            </div>
+        </div>
+
+        <div class="analysis-grid" style="grid-template-columns: 1fr;">
+            <div class="section-card">
+                <h2>Programas de Intervenção Personalizada</h2>
+                <div class="solution-grid" id="intervention-programs">
+                    
+                    <div class="solution-card" data-program="mentorias">
+                        <i class="fas fa-comments"></i>
+                        <h3>Plano de Acompanhamento (Mentoria)</h3>
+                        <p>Oferece mentoria e apoio emocional individualizado para aumentar o engajamento do aluno[cite: 19].</p>
+                        <button class="btn btn-contact btn-small program-action" data-action="ativar"><i class="fas fa-plus-circle"></i> Gerenciar Mentores</button>
+                    </div>
+
+                    <div class="solution-card" data-program="financeiro">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Auxílios e Bolsas (Assistência)</h3>
+                        <p>Central de programas de assistência financeira para mitigar o principal fator de risco de evasão.</p>
+                        <button class="btn btn-contact btn-small program-action" data-action="ativar"><i class="fas fa-search-dollar"></i> Ver Candidatos</button>
+                    </div>
+
+                    <div class="solution-card" data-program="didatica">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <h3>Ajuste Curricular e Monitorias</h3>
+                        <p>Plano de ação para coordenadores melhorarem a didática e oferecerem monitorias de reforço.</p>
+                        <button class="btn btn-contact btn-small program-action" data-action="ativar"><i class="fas fa-chart-bar"></i> Monitorar Eficácia</button>
+                    </div>
+
+                    <div class="solution-card" data-program="parcerias">
+                        <i class="fas fa-university"></i>
+                        <h3>Parcerias Institucionais</h3>
+                        <p>Gerenciamento de convênios com faculdades privadas e parceiros como o Unisenai[cite: 15, 16].</p>
+                        <button class="btn btn-contact btn-small program-action" data-action="ativar"><i class="fas fa-users"></i> Gerenciar Convênios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-card">
+            <h2>Histórico de Intervenções Recentes</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Aluno</th>
+                        <th>Risco</th>
+                        <th>Programa Acionado</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>12/10/2024</td>
+                        <td>Ana C. L.</td>
+                        <td>Alto</td>
+                        <td>Mentoria (Financeira)</td>
+                        <td style="color: var(--success-color); font-weight: 700;">Em Retenção</td>
+                    </tr>
+                    <tr>
+                        <td>10/10/2024</td>
+                        <td>Felipe S.</td>
+                        <td>Médio</td>
+                        <td>Bolsa Auxílio (Aplicado)</td>
+                        <td style="color: var(--warning-color); font-weight: 700;">Em Análise</td>
+                    </tr>
+                    <tr>
+                        <td>05/10/2024</td>
+                        <td>Carla M.</td>
+                        <td>Alto</td>
+                        <td>Mentoria (Saúde Mental)</td>
+                        <td style="color: var(--success-color); font-weight: 700;">Em Retenção</td>
+                    </tr>
+                    <tr>
+                        <td>01/10/2024</td>
+                        <td>Rafaela B.</td>
+                        <td>Médio</td>
+                        <td>Ajuste Curricular (Feedback)</td>
+                        <td style="color: var(--danger-color); font-weight: 700;">Evasão</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p> &copy; 2025 UNISENAI. Implementação de Solução Preventiva à Evasão.</p>
+    </footer>
+    <script src="script.js"></script> 
+</body>
+</html>
