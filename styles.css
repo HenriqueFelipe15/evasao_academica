@@ -655,3 +655,144 @@ footer a {
     border-color: #ccc !important;
     color: white !important;
 }
+
+/* --- ESTILOS ESPECÍFICOS DO UPLOAD --- */
+
+.upload-section {
+    background-color: white; 
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 30px;
+    border-left: 5px solid var(--primary-color);
+}
+
+.upload-section h2 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.upload-section p {
+    margin-bottom: 25px;
+    color: #6c757d;
+}
+
+.upload-form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.upload-form-group input[type="file"] {
+    display: block;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.upload-form-group button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.upload-form-group button:hover {
+    background-color: #003366;
+}
+
+.message {
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    display: none; 
+    font-weight: bold;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* --- ESTILOS ESPECÍFICOS DO UPLOAD --- */
+
+.upload-section {
+    /* Fundo branco e margens para dar destaque */
+    background-color: white; 
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 30px;
+    /* Linha lateral azul para seguir o padrão do dashboard */
+    border-left: 5px solid var(--primary-color);
+}
+
+.upload-section h2 {
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.upload-section p {
+    margin-bottom: 25px;
+    color: #6c757d;
+}
+
+.upload-form-group {
+    /* Centraliza o formulário dentro da seção */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* --- Estilos para Detalhes do Arquivo Pós-Upload (NOVO) --- */
+.file-details-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: #e3f2fd; /* Cor de fundo azul claro */
+    border: 1px solid #90caf9;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.file-info span {
+    display: block;
+    margin-bottom: 3px;
+    text-align: left;
+}
+
+.file-name {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.delete-button {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+    background-color: #a71d2a;
+}

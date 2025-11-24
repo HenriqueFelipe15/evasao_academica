@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Dados - Observatório Educacional</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line"></i>
+            Observatório Educacional
+        </div>
+        <nav>
+            <ul>
+                <li><a href="dashboard_evasao.html">Dashboard</a></li>
+                <li><a href="alunos.html">Alunos</a></li> 
+                <li><a href="upload.html" class="active">Upload</a></li> 
+                <li><a href="relatorios.html">Relatórios</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <h1>Upload de Dados e Arquivos</h1>
+        
+        <div class="upload-section">
+            <h2><i class="fas fa-cloud-upload-alt"></i> Carregar Novo Conjunto de Dados</h2>
+            <p>Envie arquivos de dados (CSV, XLSX) ou documentos de suporte (PDF) para atualizar ou complementar as informações do Observatório.</p>
+            
+            <form id="uploadForm" class="upload-form-group" action="/seu-endpoint-de-upload" method="post" enctype="multipart/form-data">
+                <input type="file" id="data_file" name="data_file" accept=".csv,.xlsx,.pdf" required>
+                <button type="submit" id="uploadButton"><i class="fas fa-upload"></i>&nbsp;Realizar Upload</button>
+            </form>
+
+            <div id="successMessage" class="message success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i> Arquivo carregado com sucesso! Seus dados estão sendo processados.
+            </div>
+
+            <div id="fileDetailsContainer" class="file-details-card" style="display: none;">
+                </div>
+        </div>
+    </main>
+
+    <footer>
+        <p> &copy; 2025 UNISENAI. Implementação de Solução Preventiva à Evasão.</p>
+    </footer>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const uploadButton = document.getElementById('uploadButton');
+            const successMessage = document.getElementById('successMessage');
+            const fileInput = document.getElementById('data_file');
+            const fileDetailsContainer = document.getElementById('fileDetailsContainer');
+
+            // 1. Oculta feedback anterior
+            successMessage.style.display = 'none';
+            fileDetailsContainer.style.display = 'none';
+
+            if (fileInput.files.length === 0) {
+                alert('Por favor, selecione um arquivo para upload.');
+                return;
+            }
+
+            const uploadedFile = fileInput.files[0];
+            const fileName = uploadedFile.name;
+            const uploadDate = new Date().toLocaleDateString('pt-BR');
+
+            // 2. Desabilita o botão e muda o estado
+            uploadButton.disabled = true;
+            uploadButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguarde...';
+
+            // 3. Simula o processamento
+            setTimeout(function() {
+                // 4. Restaura o botão
+                uploadButton.disabled = false;
+                uploadButton.innerHTML = '<i class="fas fa-upload"></i>&nbsp;Realizar Upload';
+
+                // 5. Exibe a mensagem de sucesso
+                successMessage.style.display = 'block';
+
+                // 6. MONTA E EXIBE O PAINEL DE DETALHES DO ARQUIVO
+                const detailsHtml = `
+                    <div class="file-info">
+                        <span class="file-name"><i class="fas fa-file-alt"></i> ${fileName}</span>
+                        <span>Data do Upload: ${uploadDate}</span>
+                    </div>
+                    <button class="delete-button" onclick="deleteFile('${fileName}')">
+                        <i class="fas fa-trash"></i> Excluir
+                    </button>
+                `;
+                
+                fileDetailsContainer.innerHTML = detailsHtml;
+                fileDetailsContainer.style.display = 'flex';
+                
+                // Limpa o campo de arquivo
+                fileInput.value = '';
+
+            }, 2000); 
+        });
+
+        // Função para simular a exclusão do arquivo
+        function deleteFile(fileName) {
+            if (confirm(`Tem certeza que deseja excluir o arquivo "${fileName}"?`)) {
+                // Lógica de exclusão simulada
+                alert(`Arquivo "${fileName}" excluído com sucesso (Simulado).`);
+                
+                // Oculta os painéis após a exclusão
+                document.getElementById('fileDetailsContainer').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'none';
+            }
+        }
+    </script>
+    <script src="script.js"></script> 
+</body>
+</html>
